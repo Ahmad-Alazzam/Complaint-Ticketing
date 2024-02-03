@@ -1,11 +1,10 @@
-﻿using Common.Enum;
-using DomainLayer.Models.Complaints;
+﻿using Common.DTOs;
+using Common.Enum;
 
 namespace RepositoryLayer.Interfaces
 {
     public interface IComplaintTicketingInterface
     {
-        public void TryLogin(string username, string password);
         void Add(ComplaintDto complaint);
         void Edit(ComplaintDto complaint);
         void UpdateComplaintStatus(int complaintId, ComplaintStatus status);

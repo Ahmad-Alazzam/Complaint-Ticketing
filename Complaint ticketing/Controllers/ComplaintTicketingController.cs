@@ -1,4 +1,5 @@
-﻿using Common.Enum;
+﻿using Common.DTOs;
+using Common.Enum;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Services;
 
@@ -8,13 +9,6 @@ namespace Complaint_ticketing.Controllers
     [ApiController]
     public class ComplaintTicketingController : ControllerBase
     {
-        [HttpPost(nameof(Login))]
-        public IActionResult Login(string userName, string password, [FromServices] ComplaintTicketingService complaintTicketingService)
-        {
-            complaintTicketingService.Login(userName, password);
-            return Ok();
-        }
-
         [HttpPost(nameof(AddComplaint))]
         public IActionResult AddComplaint(ComplaintDto complaint, [FromServices] ComplaintTicketingService complaintTicketingService)
         {

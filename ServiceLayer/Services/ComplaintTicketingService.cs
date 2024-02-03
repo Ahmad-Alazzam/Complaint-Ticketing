@@ -1,4 +1,5 @@
-﻿using Common.Enum;
+﻿using Common.DTOs;
+using Common.Enum;
 using RepositoryLayer.Repository;
 
 namespace ServiceLayer.Services
@@ -12,19 +13,9 @@ namespace ServiceLayer.Services
             _complaintTicketingRepo = complaintTicketingRepo;
         }
 
-        public void Login(string username, string password)
-        {
-           _complaintTicketingRepo.TryLogin(username, password);
-        }
-
         public void EditComplaint(ComplaintDto complaint)
         {
             _complaintTicketingRepo.Edit(complaint);
-        }
-
-        public List<ComplaintDto> GetByComplaintId(int complaintId)
-        {
-            return _complaintTicketingRepo.GetComplaintById(complaintId);
         }
 
         public List<ComplaintDto> GetByUserId(int userId)
