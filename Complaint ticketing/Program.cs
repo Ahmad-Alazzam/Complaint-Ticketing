@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using RepositoryLayer;
 using RepositoryLayer.AppDbContexts;
 using RepositoryLayer.Repository;
-using ServiceLayer;
 using ServiceLayer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<ComplaintTicketingRepo>();
 builder.Services.AddScoped<ComplaintTicketingService>();
 builder.Services.AddScoped<UserRepo>();
-builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<UserManagerService>();
 
 builder.Services.AddHttpContextAccessor();
 

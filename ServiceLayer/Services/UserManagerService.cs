@@ -1,13 +1,13 @@
 ﻿using Common.DTOs;
 using RepositoryLayer.Repository;
 
-namespace ServiceLayer
+namespace ServiceLayer.Services
 {
-    public class UserService
+    public class UserManagerService
     {
         private readonly UserRepo _userRepo;
 
-        public UserService(UserRepo userRepo)
+        public UserManagerService(UserRepo userRepo)
         {
             _userRepo = userRepo;
         }

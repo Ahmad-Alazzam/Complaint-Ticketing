@@ -1,6 +1,6 @@
 ﻿using Common.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer;
+using ServiceLayer.Services;
 
 namespace Complaint_ticketing.Controllers
 {
@@ -9,21 +9,21 @@ namespace Complaint_ticketing.Controllers
     public class UserController : ControllerBase
     {
         [HttpPost(nameof(Login))]
-        public IActionResult Login(string userName, string password, [FromServices] UserService userService)
+        public IActionResult Login(string userName, string password, [FromServices] UserManagerService userService)
         {
             userService.Login(userName, password);
             return Ok();
         }
 
         [HttpPost(nameof(AddNewUser))]
-        public IActionResult AddNewUser(string userName, string password, [FromServices] UserService userService)
+        public IActionResult AddNewUser(string userName, string password, [FromServices] UserManagerService userService)
         {
             userService.AddNewUser(userName, password);
             return Ok();
         }
 
         [HttpPost(nameof(UpdateUserInfo))]
-        public IActionResult UpdateUserInfo(UserDto user, [FromServices] UserService userService)
+        public IActionResult UpdateUserInfo(UserDto user, [FromServices] UserManagerService userService)
         {
             userService.UpdateUserInfo(user);
             return Ok();
