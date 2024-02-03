@@ -17,7 +17,7 @@ namespace DomainLayer.Models.Complaints
         [NotMapped]
         public string ComplaintText => SelectedLanguage == Language.Arabic ? ComplaintTextAr : ComplaintTextEn;
 
-        public ComplaintStatus Status { get; set; }
+        public ComplaintStatus Status { get; set; } = ComplaintStatus.UnderReview;
 
         public virtual ICollection<Demand> Demands { get; set; }
 

@@ -13,12 +13,12 @@ namespace RepositoryLayer.Repository
     {
         private readonly AppDbContext _db;
         public readonly IMapper _mapper;
-        public UserContext _currentuser;
+        public UserContext _user;
         public ComplaintTicketingRepo(AppDbContext dbContext, IMapper mapper, UserContext userContext)
         {
             _db = dbContext;
             _mapper = mapper;
-            _currentuser = userContext;
+            _user = userContext;
         }
 
         public void TryLogin(string userName, string password)
@@ -28,7 +28,7 @@ namespace RepositoryLayer.Repository
             if (user == null)
                 throw new Exception("Invalid User Info!!");
 
-            _currentuser.CurrentUser = user;
+            _user.CurrentUser = user;
         }
 
         public void Edit(ComplaintDto complaint)
@@ -41,7 +41,7 @@ namespace RepositoryLayer.Repository
             if(complaintItem == null)
                 throw new Exception("Data was not found!!");
 
-            if(complaintItem.UserId != _currentuser.CurrentUser.Id)
+            if(complaintItem.UserId != _user.CurrentUser.Id)
                 throw new Exception("You Don't Have Permetion!!");
 
             complaintItem.Demands = _mapper.Map<List<Demand>>(complaint.Demands);
@@ -62,7 +62,6 @@ namespace RepositoryLayer.Repository
         public List<ComplaintDto> GetComplaintById(int complaintId)
         {
             var result = _db.Complaints.Where(c => c.Id == complaintId).ToList();
-
             return _mapper.Map<List<ComplaintDto>>(result);
         }
 
@@ -75,23 +74,26 @@ namespace RepositoryLayer.Repository
         public void Add(ComplaintDto complaint)
         {
             var complaintItem = _mapper.Map<Complaint>(complaint);
+            complaintItem.UserId = _user.CurrentUser.Id;
             _db.Complaints.Add(complaintItem);
             _db.SaveChanges();
         }
 
         public List<ComplaintDto> GetUsersComplaints()
         {
-            if (_currentuser == null || _currentuser.CurrentUser.UserType != UserTypeEnum.Administrator)
+            if (_user == null || _user.CurrentUser.UserType != UserTypeEnum.Administrator)
                 throw new Exception("You Don't have permetion!!");
 
-            var result = _db.Complaints.Include(c => c.Demands).ToList();
+            var result = _db.Complaints
+                .Include(c => c.Demands)
+                .ToList();
 
             return _mapper.Map<List<ComplaintDto>>(result); 
         }
 
         public void UpdateComplaintStatus(int complaintId, ComplaintStatus status)
         {
-            if (_currentuser.CurrentUser.UserType != UserTypeEnum.Administrator)
+            if (_user.CurrentUser.UserType != UserTypeEnum.Administrator)
                 throw new Exception("You Don't have permetion!!");
 
             var complain = _db.Complaints.Where(c => c.Id == complaintId).SingleOrDefault();

@@ -2,6 +2,7 @@
 {
     public enum ComplaintStatus
     {
+        UnderReview,
         Approveed,
         Rejected
     }

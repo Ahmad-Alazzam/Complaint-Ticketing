@@ -8,6 +8,7 @@ public class ComplaintDto
     public string ComplaintText => SelectedLanguage == Language.Arabic ? ComplaintTextAr : ComplaintTextEn;
     public Language SelectedLanguage { get; set; }
     public List<DemandDto> Demands { get; set; }
+    public int UserId { get; set; }
     public string AttachmentFilePath { get; set; }
     public DateTime SubmissionDate { get; set; }
 }

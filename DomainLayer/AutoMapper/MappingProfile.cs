@@ -12,11 +12,17 @@ namespace DomainLayer.AutoMapper
         {
             CreateMap<User, UserDto>().ReverseMap();
 
-            CreateMap<UserExtendedDetails, UserExtendedDetailsDto>().ReverseMap();
+            CreateMap<UserExtendedDetails, UserExtendedDetailsDto>()
+                .ReverseMap()
+                .ForMember(dest => dest.Id, opt => opt.Ignore()); ;
 
-            CreateMap<Demand, DemandDto>().ReverseMap();
+            CreateMap<Demand, DemandDto>()
+                .ReverseMap()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
 
-            CreateMap<Complaint, ComplaintDto>().ReverseMap();
+            CreateMap<Complaint, ComplaintDto>()
+                .ReverseMap()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
 }

@@ -1,3 +1,5 @@
+using AutoMapper;
+using DomainLayer.AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer;
 using RepositoryLayer.AppDbContexts;
@@ -18,9 +20,15 @@ builder.Services.AddScoped<ComplaintTicketingService>();
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddAutoMapper(typeof(Program));
-
 builder.Services.AddSingleton<UserContext>();
+
+var mappingConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MappingProfile());
+});
+
+IMapper mapper = mappingConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
