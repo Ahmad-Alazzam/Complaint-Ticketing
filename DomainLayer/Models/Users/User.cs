@@ -18,8 +18,6 @@ namespace DomainLayer.Models.Users
         [Required]
         public UserTypeEnum UserType { get; set; }
 
-        [ForeignKey("UserExtendedDetails")]
-        public int UserExtendedDetailsId { get; set; }
         public virtual UserExtendedDetails UserDetails { get; set; }
     }
 }

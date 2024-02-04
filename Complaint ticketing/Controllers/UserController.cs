@@ -10,12 +10,11 @@ namespace Complaint_ticketing.Controllers
     public class UserController : ControllerBase
     {
         [HttpPost(nameof(Login))]
-        public IActionResult Login(string userName, string password, [FromServices] UserManagerService userService)
+        public ActionResult<UserDto> Login(string userName, string password, [FromServices] UserManagerService userService)
         {
             try
             {
-                userService.Login(userName, password);
-                return Ok();
+                return Ok(userService.Login(userName, password));
             }
             catch (Exception ex)
             {

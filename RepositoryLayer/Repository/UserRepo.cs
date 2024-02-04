@@ -2,6 +2,7 @@
 using Common.DTOs;
 using Common.Enum;
 using DomainLayer.Models.Users;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryLayer.AppDbContexts;
 using RepositoryLayer.Interfaces;
@@ -64,14 +65,16 @@ namespace RepositoryLayer.Repository
             _db.SaveChanges();
         }
 
-        public void TryLogin(string userName, string password)
+        public UserDto TryLogin(string userName, string password)
         {
-            var user = _db.Users.SingleOrDefault(x => x.UserName == userName && x.Password == password);
+            var user = _db.Users.Include(e => e.UserDetails).SingleOrDefault(x => x.UserName == userName && x.Password == password);
 
             if (user == null)
                 throw new Exception("Invalid User Info!!");
 
             _user.CurrentUser = user;
+
+            return _mapper.Map<UserDto>(user);
         }
 
         public bool InvalidUserInput(UserDto user)

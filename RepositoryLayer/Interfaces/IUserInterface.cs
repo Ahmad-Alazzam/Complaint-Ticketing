@@ -5,7 +5,7 @@ namespace RepositoryLayer.Interfaces
 {
     public interface IUserInterface
     {
-        public void TryLogin(string username, string password);
+        public UserDto TryLogin(string username, string password);
         public void AddNewUser(UserDto user);
         public void UpdateUserInfo(UserExtendedDetails userInfo);
     }

@@ -13,9 +13,9 @@ namespace ServiceLayer.Services
             _userRepo = userRepo;
         }
 
-        public void Login(string username, string password)
+        public UserDto Login(string username, string password)
         {
-            _userRepo.TryLogin(username, password);
+            return _userRepo.TryLogin(username, password);
         }
 
         public void AddNewUser(UserDto user)

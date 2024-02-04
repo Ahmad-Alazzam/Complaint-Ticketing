@@ -3,7 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { takeWhile } from 'rxjs';
+import { UserDto } from 'src/app/interfaces/DTOs';
 import { AuthService } from 'src/app/services/auth.service';
+import { StoreManager } from 'src/app/shared/StoreManager';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +25,7 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router,
     private messageService: MessageService,
-    private msgService: MessageService
+    private msgService: MessageService,
   ) { }
 
   get userName() {
@@ -40,9 +42,13 @@ export class LoginComponent {
     this.authService
     .login(userName as string, password as string)
     .pipe(takeWhile(() => this.isSubscribed, true),)
-    .subscribe((response) => {
-        sessionStorage.setItem('loginSuccess', userName as string);
+    .subscribe((data) => {
+      if(!!data && data.Id != 0) {
+        StoreManager.sessionStorageSetItem('userInfo', data);
         this.router.navigate(['/home']);
+      }
+      else
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid User Info!!' });
     },
     exception => {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: exception });

@@ -1,2 +1,9 @@
-<p>home works!</p>
+<p>Home works!</p>
+
+<ul>
+  <li *ngFor="let complaint of complaints">
+    {{ complaint.ComplaintText }}
+  </li>
+</ul>
+
 <p-button label="Sign out" (onClick)="logOut()"></p-button>
