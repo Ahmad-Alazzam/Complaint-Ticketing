@@ -34,6 +34,13 @@ builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
+app.UseCors(options =>
+{
+    options.AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod();
+});
+
 app.UseAuthorization();
 app.UseAuthentication();
 

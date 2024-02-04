@@ -1,4 +1,5 @@
 ﻿using Common.DTOs;
+using DomainLayer.Models.Users;
 using RepositoryLayer.Repository;
 
 namespace ServiceLayer.Services
@@ -17,14 +18,14 @@ namespace ServiceLayer.Services
             _userRepo.TryLogin(username, password);
         }
 
-        public void AddNewUser(string username, string password)
+        public void AddNewUser(UserDto user)
         {
-            _userRepo.AddNewUser(username, password);
+            _userRepo.AddNewUser(user);
         }
 
-        public void UpdateUserInfo(UserDto user)
+        public void UpdateUserInfo(UserExtendedDetails userInfo)
         {
-            _userRepo.UpdateUserInfo(user);
+            _userRepo.UpdateUserInfo(userInfo);
         }
     }
 }

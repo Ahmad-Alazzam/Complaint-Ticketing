@@ -1,4 +1,5 @@
 ﻿using Common.DTOs;
+using DomainLayer.Models.Users;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Services;
 
@@ -11,22 +12,43 @@ namespace Complaint_ticketing.Controllers
         [HttpPost(nameof(Login))]
         public IActionResult Login(string userName, string password, [FromServices] UserManagerService userService)
         {
-            userService.Login(userName, password);
-            return Ok();
+            try
+            {
+                userService.Login(userName, password);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        [HttpPost(nameof(AddNewUser))]
-        public IActionResult AddNewUser(string userName, string password, [FromServices] UserManagerService userService)
+        [HttpPost(nameof(Register))]
+        public IActionResult Register(UserDto user, [FromServices] UserManagerService userService)
         {
-            userService.AddNewUser(userName, password);
-            return Ok();
+            try
+            {
+                userService.AddNewUser(user);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost(nameof(UpdateUserInfo))]
-        public IActionResult UpdateUserInfo(UserDto user, [FromServices] UserManagerService userService)
+        public IActionResult UpdateUserInfo(UserExtendedDetails userInfo, [FromServices] UserManagerService userService)
         {
-            userService.UpdateUserInfo(user);
-            return Ok();
+            try
+            {
+                userService.UpdateUserInfo(userInfo);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

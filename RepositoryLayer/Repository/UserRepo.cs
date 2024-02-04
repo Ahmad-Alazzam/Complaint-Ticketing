@@ -5,6 +5,7 @@ using DomainLayer.Models.Users;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryLayer.AppDbContexts;
 using RepositoryLayer.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace RepositoryLayer.Repository
 {
@@ -21,30 +22,37 @@ namespace RepositoryLayer.Repository
             _user = userContext;
         }
 
-        public void AddNewUser(string username, string password)
+        public void AddNewUser(UserDto user)
         {
-            if (username.IsNullOrEmpty() || password.IsNullOrEmpty())
+            if (InvalidUserInput(user))
                 throw new Exception("Invalid Data!!");
 
-            var userNameIsTaken = _db.Users.Any(u => u.UserName == username);
+            var userNameIsTaken = _db.Users.Any(u => u.UserName == user.UserName);
 
             if (userNameIsTaken)
                 throw new Exception("User Name is Taken, Please try another!!");
 
             var newUser = new User()
             {
-                UserName = username,
-                Password = password,
-                UserType = UserTypeEnum.User
+                UserName = user.UserName,
+                Password = user.Password,
+                UserType = UserTypeEnum.User,
+                UserDetails = new UserExtendedDetails()
+                {
+                    DateOfBirth = user.UserDetails.DateOfBirth,
+                    Email = user.UserDetails.Email,
+                    Name = user.UserDetails.Name,
+                    PhoneNumber = user.UserDetails.PhoneNumber,
+                }
             };
 
             _db.Users.Add(newUser);
             _db.SaveChanges();
         }
 
-        public void UpdateUserInfo(UserDto user)
+        public void UpdateUserInfo(UserExtendedDetails userInfo)
         {
-            if (user.Id != _user.CurrentUser.Id)
+            if (userInfo.UserId != _user.CurrentUser.Id)
                 throw new Exception("You Don't Have Permetion!!");
 
             var userItem = _db.Users.SingleOrDefault(u => u.Id == _user.CurrentUser.Id);
@@ -52,7 +60,7 @@ namespace RepositoryLayer.Repository
             if (userItem == null)
                 throw new Exception("User Was Not Found!!");
 
-            userItem.UserDetails = _mapper.Map<UserExtendedDetails>(user.UserDetails);
+            userItem.UserDetails = _mapper.Map<UserExtendedDetails>(userInfo);
             _db.SaveChanges();
         }
 
@@ -64,6 +72,26 @@ namespace RepositoryLayer.Repository
                 throw new Exception("Invalid User Info!!");
 
             _user.CurrentUser = user;
+        }
+
+        public bool InvalidUserInput(UserDto user)
+        {
+            return user.UserName.IsNullOrEmpty() || user.Password.IsNullOrEmpty() ||
+                user.UserDetails.PhoneNumber.Length > 10 ||
+                IsValidEmail(user.UserDetails.Email) == false ||
+                ValidateName(user.UserDetails.Name) == false;
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            Regex validateEmailRegex = new Regex("^\\S+@\\S+\\.\\S+$");
+            return validateEmailRegex.IsMatch(email);
+        }
+
+        static bool ValidateName(string name)
+        {
+            Regex validateNameRegex = new Regex("^[A-Za-z\\s]+$");
+            return validateNameRegex.IsMatch(name);
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using Common.DTOs;
+using DomainLayer.Models.Users;
 
 namespace RepositoryLayer.Interfaces
 {
     public interface IUserInterface
     {
         public void TryLogin(string username, string password);
-        public void AddNewUser(string username, string password);
-        public void UpdateUserInfo(UserDto user);
+        public void AddNewUser(UserDto user);
+        public void UpdateUserInfo(UserExtendedDetails userInfo);
     }
 }

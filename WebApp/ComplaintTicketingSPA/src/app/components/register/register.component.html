@@ -1,0 +1,137 @@
+<form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
+  <p-card header="Register" [style]="{ width: '360px' }">
+    <div class="field">
+      <label for="UserName">User Name</label>
+      <input
+        type="text"
+        pInputText
+        formControlName="UserName"
+        class="w-full"
+        name="UserName"
+        placeholder="Type your user name"
+      />
+      <small
+        *ngIf="userName.invalid && (userName.dirty || userName.touched)"
+        class="block p-error"
+      >
+        <div *ngIf="userName.errors?.['required']">User Name is required.</div>
+      </small>
+    </div>
+    <div class="field">
+      <label for="Password">Password</label>
+      <input
+        type="Password"
+        pInputText
+        formControlName="Password"
+        class="w-full"
+        name="Password"
+        placeholder="Type your password"
+      />
+      <small
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+        class="block p-error"
+      >
+        <div *ngIf="password.errors?.['required']">Password is required.</div>
+      </small>
+    </div>
+    <div class="field">
+      <label for="ConfirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        pInputText
+        formControlName="ConfirmPassword"
+        class="w-full"
+        name="ConfirmPassword"
+        placeholder="Confirm Password"
+      />
+      <small
+        *ngIf="
+          confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)
+        "
+        class="block p-error"
+      >
+        <div *ngIf="confirmPassword.errors?.['required']">
+          Confirm the password
+        </div>
+      </small>
+      <small
+        class="block p-error"
+        *ngIf="registerForm.errors?.['passwordMismatch'] && confirmPassword.valid && password.valid"
+      >
+        Password should match
+      </small>
+    </div>
+    <div class="field">
+      <label for="fullName">Full Name</label>
+      <input
+        type="text"
+        pInputText
+        [formControl]="getFormControl('UserDetails.Name')"
+        class="w-full"
+        name="fullName"
+        placeholder="Type your name"
+      />
+      <small
+        *ngIf="getFormControl('UserDetails.Name')?.invalid && (getFormControl('UserDetails.Name')?.dirty || getFormControl('UserDetails.Name')?.touched)"
+        class="block p-error"
+      >
+        <div *ngIf="getFormControl('UserDetails.Name')?.errors?.['required']">Name is required.</div>
+        <div *ngIf="getFormControl('UserDetails.Name')?.errors?.['pattern']">Enter a valid Name</div>
+      </small>
+    </div>   
+    <div class="field">
+      <label for="phoneNumber">Phone Number</label>
+      <input
+        type="text"
+        pInputText
+        [formControl]="getFormControl('UserDetails.PhoneNumber')"
+        class="w-full"
+        name="phoneNumber"
+        placeholder="Type your phone number"
+      />
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        pInputText
+        [formControl]="getFormControl('UserDetails.Email')"
+        class="w-full"
+        name="email"
+        placeholder="Type your email"
+      />
+      <small
+        *ngIf="getFormControl('UserDetails.Email')?.invalid && (getFormControl('UserDetails.Email')?.dirty || getFormControl('UserDetails.Email')?.touched)"
+        class="block p-error"
+      >
+        <div *ngIf="getFormControl('UserDetails.Email')?.errors?.['required']">Email is required.</div>
+        <div *ngIf="getFormControl('UserDetails.Email')?.errors?.['email']">Email should be valid</div>
+      </small>
+    </div>    
+    <div class="field">
+      <label for="dateOfBirth">Date Of Birth</label>
+      <input
+        type="date"
+        pInputText
+        [formControl]="getFormControl('UserDetails.DateOfBirth')"
+        class="w-full"
+        name="dateOfBirth"
+        placeholder="Insert your date of birth"
+      />
+      <small
+        *ngIf="getFormControl('UserDetails.DateOfBirth')?.invalid && (getFormControl('UserDetails.DateOfBirth')?.dirty || getFormControl('UserDetails.DateOfBirth')?.touched)"
+        class="block p-error"
+      >
+        <div *ngIf="getFormControl('UserDetails.DateOfBirth')?.errors?.['required']">Date of birth is required.</div>
+      </small>
+    </div>
+    
+    <p-button
+      label="Register"
+      styleClass="w-full"
+      [disabled]="registerForm.invalid"
+      type="submit"
+    ></p-button>
+    <div class="mt-2">Already a member? <a routerLink="/login">Login</a></div>
+  </p-card>
+</form>
