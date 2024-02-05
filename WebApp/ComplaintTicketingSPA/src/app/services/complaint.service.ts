@@ -71,7 +71,6 @@ export class ComplaintService {
 
   handleError(error: any) {
     let errMsg = error.error;
-    console.error(errMsg); // log to console instead
     return throwError(errMsg);
 }
 }
