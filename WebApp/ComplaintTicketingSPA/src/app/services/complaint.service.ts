@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User, UserExtendedDetails } from '../interfaces/auth';
 import { Observable, catchError, map, throwError } from 'rxjs';
+import { ComplaintDto } from '../interfaces/DTOs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,15 +27,11 @@ export class ComplaintService {
       catchError(this.handleError));
   }
 
-  Add(userDetails: User) {
+  Add(complaint: ComplaintDto) {
     let url = this.baseUrl + "/AddComplaint";
-    return this.http.post(url, userDetails).pipe(
+    return this.http.post(url, complaint).pipe(
       map(res => <any>res),
       catchError(this.handleError));
-  }
-
-  UpdateUserInfo(userDetails: UserExtendedDetails) {
-    return this.http.post(`${this.baseUrl}/UpdateUserInfo`, userDetails);
   }
 
   handleError(error: any) {
