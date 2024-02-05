@@ -18,6 +18,16 @@ namespace ServiceLayer.Services
             _complaintTicketingRepo.Edit(complaint);
         }
 
+        public void DeleteComplaint(int complaintId)
+        {
+            _complaintTicketingRepo.DeleteComplaint(complaintId);
+        }
+
+        public void DeleteDemand(int demandId)
+        {
+            _complaintTicketingRepo.DeleteDemand(demandId);
+        }
+
         public List<ComplaintDto> GetByUserId(int userId)
         {
             return _complaintTicketingRepo.GetByUserId(userId);

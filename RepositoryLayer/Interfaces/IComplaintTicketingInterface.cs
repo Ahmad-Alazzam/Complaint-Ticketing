@@ -1,5 +1,4 @@
-﻿using Common.DTOs;
-using Common.Enum;
+﻿using Common.Enum;
 
 namespace RepositoryLayer.Interfaces
 {
@@ -7,6 +6,8 @@ namespace RepositoryLayer.Interfaces
     {
         void Add(ComplaintDto complaint);
         void Edit(ComplaintDto complaint);
+        void DeleteComplaint(int complaintId);
+        void DeleteDemand(int demandId);
         void UpdateComplaintStatus(int complaintId, ComplaintStatus status);
         List<ComplaintDto> GetUsersComplaints();
         List<ComplaintDto> GetComplaintById(int complaintId);

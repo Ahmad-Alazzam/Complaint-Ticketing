@@ -1,5 +1,4 @@
-﻿using Common.DTOs;
-using Common.Enum;
+﻿using Common.Enum;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Services;
 
@@ -12,40 +11,110 @@ namespace Complaint_ticketing.Controllers
         [HttpPost(nameof(AddComplaint))]
         public IActionResult AddComplaint(ComplaintDto complaint, [FromServices] ComplaintTicketingService complaintTicketingService)
         {
-            complaintTicketingService.Add(complaint);
-            return Ok();
+            try
+            {
+                complaintTicketingService.Add(complaint);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost(nameof(EditComplaint))]
         public IActionResult EditComplaint(ComplaintDto complaint, [FromServices] ComplaintTicketingService complaintTicketingService)
         {
-            complaintTicketingService.EditComplaint(complaint);
-            return Ok();
+            try
+            {
+                complaintTicketingService.EditComplaint(complaint);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost(nameof(DeleteComplaint))]
+        public IActionResult DeleteComplaint(int complaintId, [FromServices] ComplaintTicketingService complaintTicketingService)
+        {
+            try
+            {
+                complaintTicketingService.DeleteComplaint(complaintId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost(nameof(DeleteDemand))]
+        public IActionResult DeleteDemand(int demandId, [FromServices] ComplaintTicketingService complaintTicketingService)
+        {
+            try
+            {
+                complaintTicketingService.DeleteDemand(demandId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost(nameof(UpdateComplaintStatus))]
         public IActionResult UpdateComplaintStatus(int id, ComplaintStatus status, [FromServices] ComplaintTicketingService complaintTicketingService)
         {
-            complaintTicketingService.UpdateComplaintStatus(id, status);
-            return Ok();
+            try
+            {
+                complaintTicketingService.UpdateComplaintStatus(id, status);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet(nameof(GetUsersComplaints))]
-        public List<ComplaintDto> GetUsersComplaints([FromServices] ComplaintTicketingService complaintTicketingService)
+        public ActionResult<List<ComplaintDto>> GetUsersComplaints([FromServices] ComplaintTicketingService complaintTicketingService)
         {
-            return complaintTicketingService.GetUsersComplaints();
+            try
+            {
+                return Ok(complaintTicketingService.GetUsersComplaints());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet(nameof(GetByUserId))]
-        public List<ComplaintDto> GetByUserId(int userId, [FromServices] ComplaintTicketingService complaintTicketingService)
+        public ActionResult<List<ComplaintDto>> GetByUserId(int userId, [FromServices] ComplaintTicketingService complaintTicketingService)
         {
-            return complaintTicketingService.GetByUserId(userId);
+            try
+            {
+                return Ok(complaintTicketingService.GetByUserId(userId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet(nameof(GetComplaintById))]
-        public List<ComplaintDto> GetComplaintById(int complaintId, [FromServices] ComplaintTicketingService complaintTicketingService)
+        public ActionResult<List<ComplaintDto>> GetComplaintById(int complaintId, [FromServices] ComplaintTicketingService complaintTicketingService)
         {
-            return complaintTicketingService.GetComplaintById(complaintId);
+            try
+            {
+                return Ok(complaintTicketingService.GetComplaintById(complaintId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

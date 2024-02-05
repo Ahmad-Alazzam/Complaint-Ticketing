@@ -16,6 +16,7 @@ namespace DomainLayer.Models.Demands
 
         [NotMapped]
         public string DemandText => SelectedLanguage == Language.Arabic ? DemandTextAr : DemandTextEn;
+        public bool IsDeleted { get; set; }
 
         [Required]
         public int ComplaintId { get; set; }

@@ -18,6 +18,7 @@ namespace DomainLayer.Models.Complaints
         public string ComplaintText => SelectedLanguage == Language.Arabic ? ComplaintTextAr : ComplaintTextEn;
 
         public ComplaintStatus Status { get; set; } = ComplaintStatus.UnderReview;
+        public bool IsDeleted { get; set; }
 
         public virtual ICollection<Demand> Demands { get; set; } = new List<Demand>();
 
