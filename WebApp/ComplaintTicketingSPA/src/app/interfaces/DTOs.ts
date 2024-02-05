@@ -42,3 +42,10 @@ export interface ComplaintDto {
     User,
     Administrator
   }
+
+  export enum ComplaintStatus
+  {
+      UnderReview,
+      Approveed,
+      Rejected
+  }

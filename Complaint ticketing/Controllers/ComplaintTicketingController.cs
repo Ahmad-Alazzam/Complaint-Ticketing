@@ -65,11 +65,11 @@ namespace Complaint_ticketing.Controllers
         }
 
         [HttpPost(nameof(UpdateComplaintStatus))]
-        public IActionResult UpdateComplaintStatus(int id, ComplaintStatus status, [FromServices] ComplaintTicketingService complaintTicketingService)
+        public IActionResult UpdateComplaintStatus(int complaintId, ComplaintStatus status, [FromServices] ComplaintTicketingService complaintTicketingService)
         {
             try
             {
-                complaintTicketingService.UpdateComplaintStatus(id, status);
+                complaintTicketingService.UpdateComplaintStatus(complaintId, status);
                 return Ok();
             }
             catch (Exception ex)
