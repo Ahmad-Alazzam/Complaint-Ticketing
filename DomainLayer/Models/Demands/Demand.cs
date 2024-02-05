@@ -19,8 +19,5 @@ namespace DomainLayer.Models.Demands
 
         [Required]
         public int ComplaintId { get; set; }
-
-        [ForeignKey("ComplaintId")]
-        public virtual Complaint Complaint { get; set; }
     }
 }

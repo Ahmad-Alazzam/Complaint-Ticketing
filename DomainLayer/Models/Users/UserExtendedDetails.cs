@@ -11,9 +11,6 @@ namespace DomainLayer.Models.Users
         [Required]
         public int UserId { get; set; }
 
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
-
         [Required]
         public string Name { get; set; }
 

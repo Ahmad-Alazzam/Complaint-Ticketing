@@ -19,7 +19,7 @@ namespace DomainLayer.Models.Complaints
 
         public ComplaintStatus Status { get; set; } = ComplaintStatus.UnderReview;
 
-        public virtual ICollection<Demand> Demands { get; set; }
+        public virtual ICollection<Demand> Demands { get; set; } = new List<Demand>();
 
         [Required]
         public int UserId { get; set; }

@@ -1,6 +1,5 @@
 ﻿using Common.Enum;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainLayer.Models.Users
 {

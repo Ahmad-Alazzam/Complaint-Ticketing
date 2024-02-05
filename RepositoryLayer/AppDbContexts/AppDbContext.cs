@@ -9,18 +9,27 @@ namespace RepositoryLayer.AppDbContexts
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext(DbContextOptions options) : base(options)
+        {
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasOne(e => e.UserDetails)
+                .WithOne()
+                .HasForeignKey<UserExtendedDetails>(u => u.UserId)
+                .IsRequired();
+
+            modelBuilder.Entity<Complaint>()
+                .HasMany(e => e.Demands)
+                .WithOne()
+                .HasForeignKey(e => e.ComplaintId)
+                .IsRequired();
+        }
         public DbSet<User> Users { get; set; }
         public DbSet<UserExtendedDetails> UserExtendedDetails { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Demand> Demands { get; set; }
-
-        public AppDbContext(DbContextOptions options) : base(options)
-        {
-        }
-
-        public AppDbContext()
-        {
-        }
     }
 
     public class AppDbContextFactory: IDesignTimeDbContextFactory<AppDbContext>
