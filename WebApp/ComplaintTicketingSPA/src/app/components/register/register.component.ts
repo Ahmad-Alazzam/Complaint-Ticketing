@@ -14,15 +14,25 @@ import { passwordMatchValidator } from 'src/app/shared/password-match.directive'
 export class RegisterComponent {
   isSubscribed: boolean = false;
 
+  userName: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  userDetails = {
+    Name: '',
+    Email: '',
+    PhoneNumber: '',
+    DateOfBirth: ''
+  };
+
   registerForm = this.fb.group({
-    UserName: ['', [Validators.required]],
-    Password: ['', Validators.required],
-    ConfirmPassword: ['', Validators.required],
+    UserName: [this.userName, [Validators.required]],
+    Password: [this.password, Validators.required],
+    ConfirmPassword: [this.confirmPassword, Validators.required],
     UserDetails: this.fb.group({
-      Name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
-      Email: ['', [Validators.required, Validators.email]],
-      PhoneNumber: ['', []],
-      DateOfBirth: ['', Validators.required]
+      Name: [this.userDetails.Name, [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+      Email: [this.userDetails.Email, [Validators.required, Validators.email]],
+      PhoneNumber: [this.userDetails.PhoneNumber, Validators.maxLength(10)],
+      DateOfBirth: [this.userDetails.DateOfBirth, Validators.required]
     })
   }, {
     validators: passwordMatchValidator
@@ -38,34 +48,6 @@ export class RegisterComponent {
     private messageService: MessageService,
     private router: Router
   ) { }
-
-  get userName() {
-    return this.registerForm.controls['UserName'];
-  }
-
-  get password() {
-    return this.registerForm.controls['Password'];
-  }
-
-  get confirmPassword() {
-    return this.registerForm.controls['ConfirmPassword'];
-  }
-
-  get phoneNumber() {
-    return this.registerForm.controls['Password'];
-  }
-
-  get fullName() {
-    return this.registerForm.get('UserDetails.Name');
-  }
-
-  get dateOfBirth() {
-    return this.registerForm.get('UserDetails.DateOfBirth');
-  }
-
-  get email() {
-    return this.registerForm.get('UserDetails.Email');
-  }
 
   submitDetails() {
     const postData = { ...this.registerForm.value };

@@ -1,4 +1,54 @@
-<p>Home works!</p>
+<div class="container">
+  <h1>Complaint Ticketing Application</h1>
+  
+  <!-- First Form -->
+  <form id="firstForm">
+    <div class="form-group">
+      <label for="input1">Complaint:</label>
+      <input type="text" id="input1" name="input1" class="form-control" [(ngModel)]="newComplaintText">
+    </div>
+    <!-- Add more inputs if needed -->
+    <button [disabled]="disableComplaintAdd" (click)="AddNewComplaintRecord()" type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  <!-- Second Form -->
+  <form id="secondForm">
+    <div class="form-group">
+      <label for="name">Demand:</label>
+      <input type="text" id="name" name="name" class="form-control" [(ngModel)]="newDemandText">
+    </div>
+    <!-- Add more inputs if needed -->
+    <button [disabled]="disableDemandAdd" (click)="AddNewDemandRecord()" type="submit" class="btn btn-primary">Add</button>
+  </form>
+
+<div *ngFor="let item in DemandsItems">
+  <input type="text" id="name" name="name" class="form-control" [value]="item" [textContent]="item.DemandTextAr" [disabled]="true">
+</div>
+
+  <!-- Tree Structure -->
+  <ul class="tree" *ngFor="let complaint of complaints; let indx = index">
+    <li class="parent">
+      <input type="text" placeholder="Parent 1" class="form-control" [value]="complaint.ComplaintTextAr">
+      <div class="btn-group">
+        <button (click)="deleteComplaint(complaint.Id)" class="delete-btn btn">Delete</button>
+        <button (click)="editComplaint(complaint)" class="edit-btn btn">Update</button>
+      </div>
+      <ul class="children" *ngFor="let demand of complaint.Demands; let indx = index">
+        <li class="child">
+          <input type="text" placeholder="Child 1" class="form-control" [value]="demand.DemandTextAr">
+          <div class="btn-group">
+            <button (click)="deleteDemand(indx)" class="delete-btn btn">Delete</button>
+            <button (click)="editDemand(demand)" class="edit-btn btn">{{ 'Update' }}</button>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<p-button label="Sign out" (onClick)="logOut()"></p-button>
+
+<!-- <p>Home works!</p>
 
 <ul>
   <li *ngFor="let complaint of complaints">
@@ -6,4 +56,4 @@
   </li>
 </ul>
 
-<p-button label="Sign out" (onClick)="logOut()"></p-button>
+<p-button label="Sign out" (onClick)="logOut()"></p-button> -->

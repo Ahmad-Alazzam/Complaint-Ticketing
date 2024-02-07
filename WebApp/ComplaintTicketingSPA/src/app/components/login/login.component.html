@@ -6,12 +6,11 @@
         formControlName="userName" class="w-full"
         name="userName" placeholder="Type your user Name"
       />
-      <small
-        *ngIf="userName.invalid && (userName.dirty || userName.touched)"
-        class="block p-error"
-      >
-        <div *ngIf="userName.errors?.['required']">userName is required.</div>
+
+      <small *ngIf="loginForm.get('userName')?.invalid && (loginForm.get('userName')?.dirty || loginForm.get('userName')?.touched)" class="block p-error">
+        <div *ngIf="loginForm.get('userName')?.errors?.['required']">User Name is required.</div>
       </small>
+      
     </div>
     <div class="field">
       <label for="password">Password</label>
@@ -23,17 +22,15 @@
         name="password"
         placeholder="Type your password"
       />
-      <small
-        *ngIf="password.invalid && (password.dirty || password.touched)"
-        class="block p-error"
-      >
-        <div *ngIf="password.errors?.['required']">Password is required.</div>
+      <small *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="block p-error">
+        <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
       </small>
+
     </div>
     <p-button
       label="SIGN IN"
       styleClass="w-full"
-      [disabled]="loginForm.invalid"
+      [disabled]="loginForm.valid == false"
       type="submit"
     ></p-button>
     <div class="mt-2">Not a member? <a routerLink="/register">Register</a></div>

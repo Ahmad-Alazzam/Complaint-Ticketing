@@ -10,11 +10,8 @@
         name="UserName"
         placeholder="Type your user name"
       />
-      <small
-        *ngIf="userName.invalid && (userName.dirty || userName.touched)"
-        class="block p-error"
-      >
-        <div *ngIf="userName.errors?.['required']">User Name is required.</div>
+      <small *ngIf="registerForm.get('UserName')?.invalid && (registerForm.get('UserName')?.dirty || registerForm.get('UserName')?.touched)" class="block p-error">
+        <div *ngIf="registerForm.get('UserName')?.errors?.['required']">User name is required.</div>
       </small>
     </div>
     <div class="field">
@@ -27,48 +24,35 @@
         name="Password"
         placeholder="Type your password"
       />
-      <small
-        *ngIf="password.invalid && (password.dirty || password.touched)"
-        class="block p-error"
-      >
-        <div *ngIf="password.errors?.['required']">Password is required.</div>
+      <small *ngIf="registerForm.get('Password')?.invalid && (registerForm.get('Password')?.dirty || registerForm.get('Password')?.touched)" class="block p-error">
+        <div *ngIf="registerForm.get('Password')?.errors?.['required']">Password is required.</div>
       </small>
     </div>
     <div class="field">
       <label for="ConfirmPassword">Confirm Password</label>
       <input
-        type="password"
+        type="Password"
         pInputText
         formControlName="ConfirmPassword"
         class="w-full"
         name="ConfirmPassword"
         placeholder="Confirm Password"
       />
-      <small
-        *ngIf="
-          confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)
-        "
-        class="block p-error"
-      >
-        <div *ngIf="confirmPassword.errors?.['required']">
-          Confirm the password
-        </div>
+      <small *ngIf="registerForm.get('ConfirmPassword')?.invalid && (registerForm.get('ConfirmPassword')?.dirty || registerForm.get('ConfirmPassword')?.touched)" class="block p-error">
+        <div *ngIf="registerForm.get('ConfirmPassword')?.errors?.['required']">Confirm the password</div>
       </small>
-      <small
-        class="block p-error"
-        *ngIf="registerForm.errors?.['passwordMismatch'] && confirmPassword.valid && password.valid"
-      >
-        Password should match
-      </small>
+      <small *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('Password')?.valid && registerForm.get('ConfirmPassword')?.valid" class="block p-error">
+        <div >Passwords should match</div>
+      </small>      
     </div>
     <div class="field">
-      <label for="fullName">Full Name</label>
+      <label for="Name">Full Name</label>
       <input
         type="text"
         pInputText
         [formControl]="getFormControl('UserDetails.Name')"
         class="w-full"
-        name="fullName"
+        name="Name"
         placeholder="Type your name"
       />
       <small
@@ -80,24 +64,27 @@
       </small>
     </div>   
     <div class="field">
-      <label for="phoneNumber">Phone Number</label>
+      <label for="PhoneNumber">Phone Number</label>
       <input
         type="text"
         pInputText
         [formControl]="getFormControl('UserDetails.PhoneNumber')"
         class="w-full"
-        name="phoneNumber"
+        name="PhoneNumber"
         placeholder="Type your phone number"
       />
+      <small *ngIf="registerForm.get('PhoneNumber')?.invalid && (registerForm.get('PhoneNumber')?.dirty || registerForm.get('PhoneNumber')?.touched)" class="block p-error">
+        <div *ngIf="registerForm.get('PhoneNumber')?.errors?.['required']">Invalid Phone number "max length is 10 numbers"</div>
+      </small>
     </div>
     <div class="field">
-      <label for="email">Email</label>
+      <label for="Email">Email</label>
       <input
         type="text"
         pInputText
         [formControl]="getFormControl('UserDetails.Email')"
         class="w-full"
-        name="email"
+        name="Email"
         placeholder="Type your email"
       />
       <small
@@ -109,13 +96,13 @@
       </small>
     </div>    
     <div class="field">
-      <label for="dateOfBirth">Date Of Birth</label>
+      <label for="DateOfBirth">Date Of Birth</label>
       <input
         type="date"
         pInputText
         [formControl]="getFormControl('UserDetails.DateOfBirth')"
         class="w-full"
-        name="dateOfBirth"
+        name="DateOfBirth"
         placeholder="Insert your date of birth"
       />
       <small
