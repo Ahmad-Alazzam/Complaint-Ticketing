@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
        .subscribe((data) => {
          if(!!data && data.Id != 0) {
            StoreManager.sessionStorageSetItem('userInfo', data);
-           this.router.navigate(['/home']);
+           this.router.navigate(['/Add']);
          }
          else
            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid User Info!!' });

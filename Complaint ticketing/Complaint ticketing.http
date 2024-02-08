@@ -1,6 +1,6 @@
 @Complaint_ticketing_HostAddress = http://localhost:5225
 
-GET {{Complaint_ticketing_HostAddress}}/weatherforecast/
+GET {{Complaint_ticketing_HostAddress}}/api/User/
 Accept: application/json
 
 ###

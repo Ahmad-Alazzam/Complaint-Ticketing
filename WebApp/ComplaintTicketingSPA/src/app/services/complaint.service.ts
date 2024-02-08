@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User, UserExtendedDetails } from '../interfaces/auth';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { ComplaintDto, ComplaintStatus } from '../interfaces/DTOs';
+import { ComplaintDto, ComplaintStatus, DemandDto } from '../interfaces/DTOs';
 
 @Injectable({
   providedIn: 'root'
@@ -42,28 +42,38 @@ export class ComplaintService {
   }
 
   edit(complaint: ComplaintDto) {
-    let url = this.baseUrl + "/EditComplaint";
+    let url = this.baseUrl + "/UpdateComplaint";
     return this.http.post(url, complaint).pipe(
       map(res => <any>res),
       catchError(this.handleError));
   }
 
   delete(complaintId: number) {
-    let url = this.baseUrl + "/DeleteComplaint";
-    return this.http.post(url, complaintId).pipe(
+    const url = `${this.baseUrl}/DeleteComplaint?complaintId=${complaintId}`;
+
+    return this.http.post(url, {}).pipe(
       map(res => <any>res),
       catchError(this.handleError));
   }
 
   deleteDemand(demandId: number) {
-    let url = this.baseUrl + "/DeleteDemand";
-    return this.http.post(url, demandId).pipe(
+    const url = `${this.baseUrl}/DeleteDemand?demandId=${demandId}`;
+
+    return this.http.post(url, {}).pipe(
+      map(res => <any>res),
+      catchError(this.handleError));
+  }
+
+  updateDemand(demand: DemandDto) {
+    let url = this.baseUrl + "/UpdateDemand";
+    return this.http.post(url, demand).pipe(
       map(res => <any>res),
       catchError(this.handleError));
   }
 
   updateComplaintStatus(complaintId: number, status: ComplaintStatus) {
     const url = `${this.baseUrl}/UpdateComplaintStatus?complaintId=${complaintId}&status=${status}`;
+
     return this.http.post(url, {}).pipe(
       map(res => <any>res),
       catchError(this.handleError));

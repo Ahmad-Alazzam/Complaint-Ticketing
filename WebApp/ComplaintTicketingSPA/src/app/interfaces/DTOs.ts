@@ -8,6 +8,7 @@ export class ComplaintDto {
   UserId: number;
   AttachmentFilePath: string;
   SubmissionDate: Date;
+  Status: ComplaintStatus;
 
   constructor(
     Id: number = 0,
@@ -18,7 +19,8 @@ export class ComplaintDto {
     Demands: DemandDto[] = [],
     UserId: number = 0,
     AttachmentFilePath: string = '',
-    SubmissionDate: Date = new Date()
+    SubmissionDate: Date = new Date(),
+    Status: ComplaintStatus = ComplaintStatus.UnderReview
   ) {
     this.Id = Id;
     this.ComplaintTextAr = ComplaintTextAr;
@@ -29,6 +31,7 @@ export class ComplaintDto {
     this.UserId = UserId;
     this.AttachmentFilePath = AttachmentFilePath;
     this.SubmissionDate = SubmissionDate;
+    this.Status = Status;
   }
 }
 

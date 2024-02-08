@@ -1,5 +1,4 @@
-﻿using Common.DTOs;
-using Common.Enum;
+﻿using Common.Enum;
 using RepositoryLayer.Repository;
 
 namespace ServiceLayer.Services
@@ -15,7 +14,12 @@ namespace ServiceLayer.Services
 
         public void EditComplaint(ComplaintDto complaint)
         {
-            _complaintTicketingRepo.Edit(complaint);
+            _complaintTicketingRepo.Update(complaint);
+        }
+
+        public void UpdateDemand(DemandDto demand)
+        {
+            _complaintTicketingRepo.UpdateDemand(demand);
         }
 
         public void DeleteComplaint(int complaintId)

@@ -5,7 +5,7 @@ namespace RepositoryLayer.Interfaces
     public interface IComplaintTicketingInterface
     {
         void Add(ComplaintDto complaint);
-        void Edit(ComplaintDto complaint);
+        void Update(ComplaintDto complaint);
         void DeleteComplaint(int complaintId);
         void DeleteDemand(int demandId);
         void UpdateComplaintStatus(int complaintId, ComplaintStatus status);

@@ -1,0 +1,52 @@
+<div class="header-bar">
+  <button class="option" (click)="logOut()">Sign out</button>
+  <button class="option" (click)="getMyComplaints()">{{siderBarTitle}}</button>
+</div>
+
+<div class="container">
+  <h1>Complaint Ticketing Application</h1>
+  
+  <!-- First Form -->
+  <form id="firstForm" class="form-inline">
+    <div class="form-group">
+      <label for="input1">Complaint (English):</label>
+      <textarea [disabled]="DemandsItems.length > 0" class="inputArea" type="text" id="input1" name="input1" [(ngModel)]="newComplaintTextEn" [maxlength]="50" [minlength]="1" required>
+      </textarea>
+    </div>
+    <div class="form-group">
+      <label for="input1Arabic">Complaint (Arabic):</label>
+      <textarea [disabled]="DemandsItems.length > 0" class="inputArea" type="text" id="input1Arabic" name="input1Arabic" [(ngModel)]="newComplaintTextAr" [maxlength]="50" [minlength]="1" required>
+      </textarea>
+    </div>
+    <div class="btn-container">
+    </div>
+  </form>
+  
+  <!-- Second Form -->
+  <form id="secondForm" class="form-inline">
+    <div class="form-group">
+      <label for="name">Demand (English):</label>
+      <textarea class="inputArea" type="text" id="name" name="name"  [(ngModel)]="newDemandTextEn" [maxlength]="50" [minlength]="1" required>
+      </textarea>
+    </div>
+    <div class="form-group">
+      <label for="nameArabic">Demand (Arabic):</label>
+      <textarea class="inputArea" type="text" id="nameArabic" name="nameArabic" [(ngModel)]="newDemandTextAr" [maxlength]="50" [minlength]="1" required>
+      </textarea>
+    </div>
+    <div class="btn-container">
+      <p-button type="submit" [disabled]="disableDemandAdd || disableComplaintAdd" label="Add" (onClick)="AddNewDemandRecord()"></p-button>
+    </div>
+  </form>
+
+  <div class="btn">
+     <p-button [disabled]="disableDemandAdd || disableComplaintAdd" label="Submit" (onClick)="AddNewComplaintRecord()"></p-button>
+  </div>
+
+  <div class="form-group" *ngFor="let dem of DemandsItems">
+    <textarea class="displayArea" [disabled]="true" [value]="dem.DemandTextEn" type="text" id="nameArabic" name="nameArabic">
+    </textarea>
+    <textarea class="displayArea" [disabled]="true" [value]="dem.DemandTextAr" type="text" id="nameArabic" name="nameArabic">
+    </textarea>
+  </div>
+</div>

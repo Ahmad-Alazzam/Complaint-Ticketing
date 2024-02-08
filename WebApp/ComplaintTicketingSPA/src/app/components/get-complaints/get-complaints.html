@@ -1,0 +1,34 @@
+<div class="header-bar">
+    <button class="option" (click)="logOut()">Sign out</button>
+    <button class="option" (click)="addNewComplaint()">Add New Complaint</button>
+  </div>
+  <div class="container">
+    <h1 *ngIf="complaints.length > 0">Complaint Ticketing Application</h1>
+    <h1 *ngIf="complaints.length == 0">There are no Complaint Tickets</h1>
+  <div *ngFor="let complaint of complaints">
+    <ul class="tree" *ngFor="let item of complaint.Demands; let indx = index">
+        <li class="parent">
+            <div style="display: inline-flex; align-items: center;">
+                <input type="text" placeholder="Parent 1" class="form-control" [value]="complaint.ComplaintText" style="width: 200px; margin-right: 5px;">
+                <div class="btn-group" *ngIf="isAdminUser == false && complaint.Status == 0" style="display: inline-flex;">
+                  <button (click)="deleteComplaint(complaint.Id)" class="delete-btn btn">Delete</button>
+                  <button (click)="editComplaint(complaint)" class="edit-btn btn" style="margin-left: 5px;">Update</button>
+                </div>
+                <div class="btn-group" *ngIf="isAdminUser && complaint.Status == 0" style="display: inline-flex;">
+                    <button (click)="updateComplaintStatus(complaint.Id, 2)" class="delete-btn btn">Reject</button>
+                    <button (click)="updateComplaintStatus(complaint.Id, 1)" class="edit-btn btn">Approve</button>
+                </div>
+            </div>              
+          <ul class="children" *ngFor="let demand of complaint.Demands; let indx = index">
+            <li class="child">
+              <input type="text" placeholder="Child 1" class="form-control" [value]="demand.DemandText">
+              <div class="btn-group" *ngIf="isAdminUser == false && complaint.Status == 0">
+                <button (click)="deleteDemand(indx)" class="delete-btn btn">Delete</button>
+                <button (click)="editDemand(demand)" class="edit-btn btn">Update</button>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+  </div>
+  </div>

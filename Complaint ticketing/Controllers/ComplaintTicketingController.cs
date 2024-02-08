@@ -8,6 +8,32 @@ namespace Complaint_ticketing.Controllers
     [ApiController]
     public class ComplaintTicketingController : ControllerBase
     {
+        [HttpGet(nameof(GetUsersComplaints))]
+        public ActionResult<List<ComplaintDto>> GetUsersComplaints([FromServices] ComplaintTicketingService complaintTicketingService)
+        {
+            try
+            {
+                return Ok(complaintTicketingService.GetUsersComplaints());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet(nameof(GetByUserId))]
+        public ActionResult<List<ComplaintDto>> GetByUserId(int userId, [FromServices] ComplaintTicketingService complaintTicketingService)
+        {
+            try
+            {
+                return Ok(complaintTicketingService.GetByUserId(userId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost(nameof(AddComplaint))]
         public IActionResult AddComplaint(ComplaintDto complaint, [FromServices] ComplaintTicketingService complaintTicketingService)
         {
@@ -22,12 +48,26 @@ namespace Complaint_ticketing.Controllers
             }
         }
 
-        [HttpPost(nameof(EditComplaint))]
-        public IActionResult EditComplaint(ComplaintDto complaint, [FromServices] ComplaintTicketingService complaintTicketingService)
+        [HttpPost(nameof(UpdateComplaint))]
+        public IActionResult UpdateComplaint(ComplaintDto complaint, [FromServices] ComplaintTicketingService complaintTicketingService)
         {
             try
             {
                 complaintTicketingService.EditComplaint(complaint);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost(nameof(UpdateDemand))]
+        public IActionResult UpdateDemand(DemandDto demand, [FromServices] ComplaintTicketingService complaintTicketingService)
+        {
+            try
+            {
+                complaintTicketingService.UpdateDemand(demand);
                 return Ok();
             }
             catch (Exception ex)
@@ -71,32 +111,6 @@ namespace Complaint_ticketing.Controllers
             {
                 complaintTicketingService.UpdateComplaintStatus(complaintId, status);
                 return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet(nameof(GetUsersComplaints))]
-        public ActionResult<List<ComplaintDto>> GetUsersComplaints([FromServices] ComplaintTicketingService complaintTicketingService)
-        {
-            try
-            {
-                return Ok(complaintTicketingService.GetUsersComplaints());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet(nameof(GetByUserId))]
-        public ActionResult<List<ComplaintDto>> GetByUserId(int userId, [FromServices] ComplaintTicketingService complaintTicketingService)
-        {
-            try
-            {
-                return Ok(complaintTicketingService.GetByUserId(userId));
             }
             catch (Exception ex)
             {

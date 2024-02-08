@@ -6,3 +6,167 @@ body {
   height: 100%;
   margin: 0;
 }
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+.container {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.parent,
+.child {
+  list-style-type: none;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.parent input,
+.child input {
+  width: calc(95% - 120px);
+  margin-right: 10px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.parent .btn-group,
+.child .btn-group {
+  top: 0;
+  right: 0;
+}
+.btn-group button {
+  display: inline-block; /* Ensure buttons are displayed next to each other */
+}
+
+.btn-group {
+  display: inline-block; /* Ensure buttons are displayed next to each other */
+}
+
+.btn {
+  margin-right: 5px; /* Add margin between buttons */
+}
+
+/* If needed, you can adjust the button styles as required */
+
+
+.delete-btn,
+.update-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  margin-left: 5px;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+}
+
+.update-btn {
+  background-color: #007bff;
+}
+
+/* CSS styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  width: calc(90%);
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.btn-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Adjust styling for inline inputs */
+.form-inline .form-group {
+  display: inline-block;
+  margin-right: 100px;
+}
+
+.form-inline .form-group:last-child {
+  margin-right: 0;
+}
+
+textarea.inputArea{
+  width: 150%;
+  height: 100px;
+}
+
+form {
+  display: flex;
+  align-items: center;
+}
+
+form .form-group:nth-child(2){
+  margin-left: 10px;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+}
+
+textarea.displayArea {
+  width: 50%;
+  height: 80px;
+  margin-top: 5%;
+}
+
+.header-bar {
+  background-color: #f0f0f0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.option {
+  display: block;
+  width: auto; /* Change width to auto to allow buttons to expand based on content */
+  padding: 10px 20px; /* Adjust padding for better spacing */
+  text-align: center;
+  border: none;
+  background-color: skyblue;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  transition: transform 0.2s;
+  margin-right: 10px; /* Add margin between buttons */
+}
+
+.option:last-child {
+  margin-right: 0; /* Remove margin from last button to prevent extra space */
+}
+
+.option:hover {
+  transform: translateY(-3px);
+}
